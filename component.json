@@ -1,0 +1,13 @@
+{
+    "name": "scroll-behavior",
+    "description": "Scroll behaviors for use with history",
+    "repos": "https://github.com/taion/scroll-behavior.git",
+    "main": "lib/index.js",
+    "tag": "master",
+    "reposType": "npm",
+    "dependencies": {
+        "dom-helpers": "^2.4.0",
+        "history": "^1.12.1 || ^2.0.0"
+    },
+    "version": "0.3.3"
+}
