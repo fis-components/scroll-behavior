@@ -32,11 +32,13 @@ function useStandardScroll(createHistory) {
 
   // `history` will invoke this listener synchronously, so `currentKey` will
   // always be defined.
-  function updateScroll(_ref) {
+  function updateLocation(_ref) {
     var key = _ref.key;
 
     currentKey = key;
+  }
 
+  function updateScroll() {
     var _ref2 = getScrollPosition() || [0, 0];
 
     var x = _ref2[0];
@@ -104,5 +106,5 @@ function useStandardScroll(createHistory) {
     unlistenBefore();
   }
 
-  return createUseScroll(updateScroll, start, stop)(createHistory);
+  return createUseScroll(updateScroll, start, stop, updateLocation)(createHistory);
 }

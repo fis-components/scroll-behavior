@@ -9,5 +9,5 @@
         "dom-helpers": "^2.4.0",
         "history": "^1.12.1 || ^2.0.0"
     },
-    "version": "0.3.3"
+    "version": "0.3.4"
 }

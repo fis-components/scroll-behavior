@@ -6,15 +6,11 @@ export default createUseScroll;
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-function defaultShouldUpdateScroll() {
-  return true;
-}
-function createUseScroll(updateScroll, start, stop) {
+function createUseScroll(updateScroll, start, stop, updateLocation) {
   return function (createHistory) {
     return function () {
       var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var _options$shouldUpdateScroll = options.shouldUpdateScroll;
-      var shouldUpdateScroll = _options$shouldUpdateScroll === undefined ? defaultShouldUpdateScroll : _options$shouldUpdateScroll;
+      var shouldUpdateScroll = options.shouldUpdateScroll;
 
       var historyOptions = _objectWithoutProperties(options, ["shouldUpdateScroll"]);
 
@@ -56,7 +52,14 @@ function createUseScroll(updateScroll, start, stop) {
         listeners.forEach(function (listener) {
           return listener(location);
         });
-        if (shouldUpdateScroll(oldLocation, currentLocation)) {
+
+        // useStandardScroll needs the new location even when not updating the
+        // scroll position, to update the current key.
+        if (updateLocation) {
+          updateLocation(location);
+        }
+
+        if (!shouldUpdateScroll || shouldUpdateScroll(oldLocation, currentLocation)) {
           updateScroll(location);
         }
       }
